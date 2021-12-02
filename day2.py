@@ -25,7 +25,7 @@ def part2(data):
     for inst in data:
         if inst[0] == "forward":
             h += inst[1]
-            d += (aim*int(inst[1]))
+            d += (aim*inst[1])
         elif inst[0] == "down":
             aim += inst[1]
         elif inst[0] == "up":
