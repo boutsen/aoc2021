@@ -37,8 +37,10 @@ def play_bingo(draws,boards):
         if count > 5:
             for board in boards:
                 if bingo(board):
+                    # First BINGO
                     if len(boards) == nr_of_boards:
                         print("Part1:" + str(sum(unmarked for unmarked in board if unmarked > 0) * draw))
+                    # Last BINGO to finish
                     if len(boards) == 1:
                         print("Part2:" + str(sum(unmarked for unmarked in board if unmarked > 0) * draw))
                         return
