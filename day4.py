@@ -1,5 +1,3 @@
-import re
-
 f = open("inputs/day4", "r")
 
 
