@@ -20,13 +20,12 @@ def mark_num(board,num):
 
 
 def bingo(board):
-    for row in range(0,len(board)-5,5):
+    for row in range(0,20,5):
         if sum(board[row:row+5]) == -5:
             return True
     for col in range(0,5):
-        if sum([board[col+i] for i in range(0,len(board),5)]) == -5:
+        if sum([board[col+i] for i in range(0,25,5)]) == -5:
             return True
-
     return False
     
 
