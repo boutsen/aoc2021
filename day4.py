@@ -26,8 +26,9 @@ def bingo(board):
     for col in range(0,5):
         if sum([board[col+i] for i in range(0,25,5)]) == -5:
             return True
+
     return False
-    
+
 
 def play_bingo(draws,boards):
     count = 0
@@ -37,8 +38,13 @@ def play_bingo(draws,boards):
         if count > 5:
             for board in boards:
                 if bingo(board):
-                    return sum(unmarked for unmarked in board if unmarked > 0) * draw
+                    if len(boards) == nr_of_boards:
+                        print("Part1:" + str(sum(unmarked for unmarked in board if unmarked > 0) * draw))
+                    if len(boards) == 1:
+                        print("Part2:" + str(sum(unmarked for unmarked in board if unmarked > 0) * draw))
+                        return
+                    boards.remove(board)
         count += 1
 
 
-print(play_bingo(DRAWS,BOARDS))
+play_bingo(DRAWS,BOARDS)
