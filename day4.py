@@ -36,7 +36,7 @@ def play_bingo(draws,boards):
         boards = [mark_num(board,draw) for board in boards]
         if count > 5:
             for board in boards:
-                if bingo(board) and (len(boards) == nr_of_boards or len(boards) == 1):
+                if bingo(board):
                     return sum(unmarked for unmarked in board if unmarked > 0) * draw
         count += 1
 
