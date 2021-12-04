@@ -7,6 +7,7 @@ def create_board(input):
         board.extend(int(x) for x in line.split())
     return board
 
+
 DRAWS = [int(draw) for draw in f.readline().split(",")]
 BOARDS = [create_board(board) for board in f.read().split("\n\n")]
 
@@ -45,4 +46,4 @@ def play_bingo(draws,boards):
         count += 1
 
 
-play_bingo(DRAWS,BOARDS)
+play_bingo(DRAWS, BOARDS)
