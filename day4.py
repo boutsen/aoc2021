@@ -12,7 +12,7 @@ DRAWS = [int(draw) for draw in f.readline().split(",")]
 BOARDS = [create_board(board) for board in f.read().split("\n\n")]
 
 
-def mark_num(board,num):
+def mark_num(board, num):
     if num in board:
         board[board.index(num)] = -1
     return board
@@ -23,17 +23,17 @@ def bingo(board):
         if sum(board[row:row+5]) == -5:
             return True
     for col in range(0,5):
-        if sum([board[col+i] for i in range(0,25,5)]) == -5:
+        if sum([board[col+i] for i in range(0, 25, 5)]) == -5:
             return True
 
     return False
 
 
-def play_bingo(draws,boards):
+def play_bingo(draws, boards):
     count = 0
     nr_of_boards = len(boards)
     for draw in draws:
-        boards = [mark_num(board,draw) for board in boards]
+        boards = [mark_num(board, draw) for board in boards]
         if count > 5:
             for board in boards:
                 if bingo(board):
