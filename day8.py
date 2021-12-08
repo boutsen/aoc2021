@@ -39,7 +39,7 @@ def part2(data, known_signals):
                 else:
                     signals['2'] = sorted(d)
 
-        result += int(''.join([list(signals.keys())[list(signals.values()).index(o)] for o in output]), 10)
+        result += int(''.join([list(signals.keys())[list(signals.values()).index(o)] for o in output]))
     return result
 
 
