@@ -2,30 +2,30 @@ f = open("inputs/day4", "r")
 
 
 def create_board(input):
-    board = []
-    for line in input.split("\n"):
-        board.extend(int(x) for x in line.split())
+    board = {}
+    for i, line in enumerate(input.split("\n")):
+        for j, num in enumerate(line.split()):
+            board[(i, j)] = int(num)
     return board
 
 
 DRAWS = [int(draw) for draw in f.readline().split(",")]
-BOARDS = [create_board(board) for board in f.read().split("\n\n")]
+BOARDS = [create_board(board.strip()) for board in f.read().split("\n\n")]
 
 
 def mark_num(board, num):
-    if num in board:
-        board[board.index(num)] = -1
+    index = [(x, y) for x, y in board if board[(x, y)] == num]
+    if index:
+        board[index[0]] = -1
     return board
 
 
 def bingo(board):
-    for row in range(0,20,5):
-        if sum(board[row:row+5]) == -5:
+    for c in range(0, 5):
+        if sum([board[(x, y)] for x, y in {(c, 0), (c, 1), (c, 2), (c, 3), (c, 4)}]) == -5:
             return True
-    for col in range(0,5):
-        if sum([board[col+i] for i in range(0, 25, 5)]) == -5:
+        if sum([board[(y, x)] for x, y in {(c, 0), (c, 1), (c, 2), (c, 3), (c, 4)}]) == -5:
             return True
-
     return False
 
 
@@ -39,10 +39,10 @@ def play_bingo(draws, boards):
                 if bingo(board):
                     # First BINGO
                     if len(boards) == nr_of_boards:
-                        print("Part1:" + str(sum(unmarked for unmarked in board if unmarked > 0) * draw))
+                        print("Part1:" + str(sum(board[(x, y)] for x, y in board if board[(x, y)] > 0) * draw))
                     # Last BINGO to finish
                     if len(boards) == 1:
-                        print("Part2:" + str(sum(unmarked for unmarked in board if unmarked > 0) * draw))
+                        print("Part2:" + str(sum(board[(x, y)] for x, y in board if board[(x, y)] > 0) * draw))
                         return
                     boards.remove(board)
         count += 1
