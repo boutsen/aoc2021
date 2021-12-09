@@ -17,27 +17,27 @@ def part1(data, known_signals):
 def part2(data, known_signals):
     result = 0
     for line in data:
-        digits = line.split(' | ')[0].split()
+        digits = [sorted(o) for o in line.split(' | ')[0].split()]
         output = [sorted(o) for o in line.split(' | ')[1].split()]
         signals = defaultdict(str)
         for d in [signal for signal in digits if len(signal) in known_signals.keys()]:
-            signals[known_signals[len(d)]] = sorted(d)
+            signals[known_signals[len(d)]] = d
 
         for d in [signal for signal in digits if len(signal) not in known_signals.keys()]:
             if len(d) == 6:
                 if len(set(signals['4']) & set(d)) == 4:
-                    signals['9'] = sorted(d)
+                    signals['9'] = d
                 elif len(set(signals['7']) & set(d)) == 3:
-                    signals['0'] = sorted(d)
+                    signals['0'] = d
                 else:
-                    signals['6'] = sorted(d)
+                    signals['6'] = d
             if len(d) == 5:
                 if len(set(signals['7']) & set(d)) == 3:
-                    signals['3'] = sorted(d)
+                    signals['3'] = d
                 elif len(set(signals['4']) & set(d)) == 3:
-                    signals['5'] = sorted(d)
+                    signals['5'] = d
                 else:
-                    signals['2'] = sorted(d)
+                    signals['2'] = d
 
         result += int(''.join([list(signals.keys())[list(signals.values()).index(o)] for o in output]))
     return result
