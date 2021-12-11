@@ -9,7 +9,6 @@ CLOSINGBRACKETS = ")]}>"
 
 def part1(data, openc, closec):
     scores = [3, 57, 1197, 25137]
-
     score = 0
     for line in data:
         expected = []
@@ -21,15 +20,12 @@ def part1(data, openc, closec):
                 break
             else:
                 expected = expected[:-1]
-
     return score
 
 
 def part2(data, openc, closec):
     scores = [1, 2, 3, 4]
-
     total_score = []
-
     for line in data:
         score = 0
         expected = []
@@ -38,11 +34,9 @@ def part2(data, openc, closec):
                 expected.append(closec[openc.index(line[i])])
             else:
                 expected = expected[:-1]
-
         for i in reversed(expected):
             score = score * 5 + scores[closec.index(i)]
         total_score.append(score)
-
     total_score.sort()
     return total_score[int(len(total_score)/2)]
 
