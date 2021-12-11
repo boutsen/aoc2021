@@ -29,8 +29,7 @@ def part1(octopussies, steps):
         while flashers:
             flashed.extend(flashers)
             for (x, y) in flashers:
-                neighbours = get_neighbours(x, y)
-                for neighbour in neighbours:
+                for neighbour in get_neighbours(x, y):
                     octopussies[neighbour] += 1
             flashers = [(x, y) for (x, y) in octopussies if octopussies[(x, y)] > 9 and (x, y) not in flashed]
 
