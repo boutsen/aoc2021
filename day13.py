@@ -3,7 +3,7 @@ f = open("inputs/day13", "r")
 
 LINES = f.read()
 DOTS = [(int(x), int(y)) for x, y in re.findall(r"(\d+),(\d+)", LINES)]
-FOLDS = [(axis, line) for axis, line in re.findall(r"fold along (x|y)=(\d+)", LINES)]
+FOLDS = [(axis, int(line)) for axis, line in re.findall(r"fold along (x|y)=(\d+)", LINES)]
 
 
 def fold(dots, axis, line):
@@ -20,12 +20,12 @@ def visualize(dots, x, y):
 
 def part1(dots, folds):
     axis, line = folds[0]
-    return len(fold(dots, axis, int(line)))
+    return len(fold(dots, axis, line))
 
 
 def part2(dots, folds):
     for axis, line in folds:
-        dots = fold(dots, axis, int(line))
+        dots = fold(dots, axis, line)
     visualize(dots, max(dots)[1]+1, max(dots)[0]+1)
 
 
