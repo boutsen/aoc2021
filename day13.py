@@ -15,13 +15,7 @@ def fold(dots, axis, line):
 
 def visualize(dots, x, y):
     for i in range(x):
-        line = ""
-        for j in range(y):
-            if (j, i) in dots:
-                line += "#"
-            else:
-                line += "."
-        print(line)
+        print("".join(["#" if (j, i) in dots else "." for j in range(y)]))
 
 
 def part1(dots, folds):
