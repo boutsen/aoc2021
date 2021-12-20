@@ -1,3 +1,4 @@
+from itertools import product
 f = open("inputs/day20", "r")
 
 RULE = f.readline().strip()
@@ -14,19 +15,15 @@ def enhance_image(image, rule, switch):
     new_image = set()
     rows = [r for r, c in image]
     cols = [c for r, c in image]
-    neighbours = [-1, 0, 1]
 
-    for r in range(min(rows)-1, max(rows)+2):
-        for c in range(min(cols)-1, max(cols)+2):
-            tmp = 0
-            bit = 8
-            for nr in neighbours:
-                for nc in neighbours:
-                    if ((r+nr, c+nc) in image) == switch:
-                        tmp += 2 ** bit
-                    bit -= 1
-            if (rule[tmp] == '#') != switch:
-                new_image.add((r, c))
+    for (r, c) in product(range(min(rows)-1, max(rows)+2), range(min(cols)-1, max(cols)+2)):
+        tmp, bit = 0, 8
+        for (nr, nc) in product((-1, 0, 1), (-1, 0, 1)):
+            if ((r + nr, c + nc) in image) == switch:
+                tmp += 2 ** bit
+            bit -= 1
+        if (rule[tmp] == '#') != switch:
+            new_image.add((r, c))
     return new_image
 
 
